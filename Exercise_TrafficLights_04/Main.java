@@ -25,7 +25,6 @@ public class Main {
         }
 
     }
-
     private static List<Colors> changeColor(List<Colors> colors) {
         for (int i = 0; i < colors.size(); i++) {
             switch (colors.get(i)) {
