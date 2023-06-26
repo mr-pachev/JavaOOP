@@ -9,10 +9,14 @@ public class Person {
 
     private double salary;
 
-    public Person(String firstName, String lastName, int age, double salary) {
+    public Person(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+    }
+
+    public Person(String firstName, String lastName, int age, double salary) {
+        this(firstName, lastName, age);
         this.salary = salary;
     }
 
