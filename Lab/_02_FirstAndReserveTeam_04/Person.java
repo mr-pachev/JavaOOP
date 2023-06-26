@@ -18,7 +18,6 @@ public class Person {
         this.age = age;
     }
 
-
     public Person(String firstName, String lastName, int age, double salary) {
         this(firstName, lastName, age);
         this.setSalary(salary);
@@ -83,11 +82,11 @@ public class Person {
         this.setSalary(resultFromBonus * this.getSalary());
     }
 
-
-
     @Override
     public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("#.0###");
-        return String.format("%s %s gets %s leva", this.getFirstName(), this.getLastName(), decimalFormat.format(this.salary));
+
+        return String.format("%s %s gets %s leva"
+                , this.getFirstName(), this.getLastName()
+                , new DecimalFormat("#.0###").format(this.getSalary()));
     }
 }

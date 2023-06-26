@@ -19,7 +19,7 @@ public class Team {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
@@ -33,9 +33,10 @@ public class Team {
 
     public void addPlayer(Person person) {
         if (person.getAge() < 40) {
-            this.firstTeam.add(person);
+           this.firstTeam.add(person);
         } else {
-            this.reserveTeam.add(person);
+           this.reserveTeam.add(person);
         }
     }
+
 }
