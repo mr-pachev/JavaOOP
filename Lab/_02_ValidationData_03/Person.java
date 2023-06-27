@@ -43,7 +43,6 @@ public class Person {
         if (lastName.length() < 3) {
             throw new IllegalArgumentException("Last name cannot be less than 3 symbols");
         }
-        this.firstName = firstName;
         this.lastName = lastName;
     }
 
