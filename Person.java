@@ -1,4 +1,6 @@
-package Exercise_02_ShoppingSpree_03;
+
+
+import Exercise_02_ShoppingSpree_03.Product;
 
 import java.util.ArrayList;
 import java.util.List;

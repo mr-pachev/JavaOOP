@@ -45,15 +45,17 @@ public class Main {
             input = scanner.nextLine();
         }
 
-        for (Map.Entry<String, Person> entry : personMap.entrySet()) {
-            if (entry.getValue().getProducts().isEmpty()){
-                System.out.printf("%s - Nothing bought", entry.getKey());
-            }else {
-                System.out.printf("%s - ", entry.getKey());
-                List<Product> currentProduct = entry.getValue().getProducts();
-                System.out.println(currentProduct.toString().replaceAll("[\\[\\],]", "")
-                        .replaceAll(" ", ", "));
-            }
-        }
+//        for (Map.Entry<String, Person> entry : personMap.entrySet()) {
+//            if (entry.getValue().getProducts().isEmpty()){
+//                System.out.printf("%s - Nothing bought", entry.getKey());
+//            }else {
+//                System.out.printf("%s - ", entry.getKey());
+//                List<Product> currentProduct = entry.getValue().getProducts();
+//                System.out.println(currentProduct.toString().replaceAll("[\\[\\],]", "")
+//                        .replaceAll(" ", ", "));
+//            }
+//        }
+        personMap.values()
+                .forEach(System.out::println);
     }
 }
