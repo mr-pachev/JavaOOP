@@ -24,13 +24,21 @@ public class Person {
     }
 
     public void buyProduct(Product product) {
-        if (this.money >= product.getCost()){
-            this.products.add(product);
+        if (this.money <= product.getCost()){
+            String message = String.format("%s can't afford %s", this.name, product.getName());
+            throw new IllegalArgumentException(message);
+        }
+        this.products.add(product);
             this.money -= product.getCost();
             System.out.printf("%s bought %s%n", this.name, product.getName());
-        }else {
-            System.out.printf("%s can't afford %s%n", this.name, product.getName());
-        }
+
+//        if (this.money >= product.getCost()){
+//            this.products.add(product);
+//            this.money -= product.getCost();
+//            System.out.printf("%s bought %s%n", this.name, product.getName());
+//        }else {
+//            System.out.printf("%s can't afford %s%n", this.name, product.getName());
+//        }
     }
 
     private void setName(String name) {
