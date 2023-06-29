@@ -24,11 +24,11 @@ public class Person {
     }
 
     public void buyProduct(Product product) {
-        if (this.money <= product.getCost()){
+        if (this.money < product.getCost()){
             String message = String.format("%s can't afford %s", this.name, product.getName());
             throw new IllegalArgumentException(message);
         }
-        this.products.add(product);
+            this.products.add(product);
             this.money -= product.getCost();
             System.out.printf("%s bought %s%n", this.name, product.getName());
 
