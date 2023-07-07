@@ -1,4 +1,4 @@
-package src.Exercise._05_Vehicles_01;
+package src.Exercise._05_VehiclesExtension_02;
 
 import java.util.Scanner;
 

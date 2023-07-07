@@ -1,4 +1,4 @@
-package src.Exercise._05_Vehicles_01;
+package src.Exercise._05_VehiclesExtension_02;
 
 public class Truck extends VehicleImpl {
     private final static double AC_ADDITIONAL_CONSUMPTION = 1.6;
