@@ -5,22 +5,28 @@ import java.text.DecimalFormat;
 public abstract class VehicleImpl implements Vehicles {
     private double fuelQuantity;
     private double litersPerKm;
+    private double tankCapacity;
 
-    public VehicleImpl(double fuelQuantity, double litersPerKm) {
+    public VehicleImpl(double fuelQuantity, double litersPerKm, double tankCapacity) {
         this.setFuelQuantity(fuelQuantity);
         this.litersPerKm = litersPerKm;
+        this.tankCapacity = tankCapacity;
     }
 
-    public double getLitersPerKm() {                   //за изчисляването но разхода на гориво в подкласовете
+    public double getLitersPerKm() {                                //за изчисляването но разхода на гориво в подкласовете
         return litersPerKm;
     }
 
-    public double getFuelQuantity() {                   //трябва ни за принтирането в toString
+    public double getFuelQuantity() {                               //трябва ни за принтирането в toString
         return fuelQuantity;
     }
 
-    public void setFuelQuantity(double fuelQuantity) {  //трябва ни за промяна разхода на гориво
-        this.fuelQuantity = fuelQuantity;
+    public void setLitersPerKm(double litersPerKm) {
+        this.litersPerKm = litersPerKm;
+    }
+
+    public void setFuelQuantity(double fuelQuantity) {              //трябва ни за промяна разхода на гориво
+            this.fuelQuantity = fuelQuantity;
     }
 
     @Override
@@ -38,6 +44,15 @@ public abstract class VehicleImpl implements Vehicles {
 
     @Override
     public void refueling(double liters) {                          //еднакъв метод за добавяне на гориво при всички превозни средства
+
+        if(liters < 1){
+            throw new IllegalArgumentException("Fuel must be a positive number");
+        }
+
+        double newFuelQuantity = this.fuelQuantity + liters;
+        if (newFuelQuantity > this.tankCapacity){
+            throw new  IllegalArgumentException("Cannot fit fuel in tank");
+        }
         this.fuelQuantity += liters;
     }
 

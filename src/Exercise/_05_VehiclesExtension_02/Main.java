@@ -6,8 +6,26 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        VehicleImpl car = creatVechicles(scanner.nextLine().split("\\s+"));
-        VehicleImpl truck = creatVechicles(scanner.nextLine().split("\\s+"));
+        String[] vehicleData = scanner.nextLine().split("\\s+");
+        double fuelQuantity = Double.parseDouble(vehicleData[1]);
+        double litersPerKm = Double.parseDouble(vehicleData[2]);
+        double tankCapacity = Double.parseDouble(vehicleData[3]);
+
+        Car car = new Car(fuelQuantity, litersPerKm, tankCapacity);
+
+        vehicleData = scanner.nextLine().split("\\s+");
+        fuelQuantity = Double.parseDouble(vehicleData[1]);
+        litersPerKm = Double.parseDouble(vehicleData[2]);
+        tankCapacity = Double.parseDouble(vehicleData[3]);
+
+        Truck truck = new Truck(fuelQuantity, litersPerKm, tankCapacity);
+
+        vehicleData = scanner.nextLine().split("\\s+");
+        fuelQuantity = Double.parseDouble(vehicleData[1]);
+        litersPerKm = Double.parseDouble(vehicleData[2]);
+        tankCapacity = Double.parseDouble(vehicleData[3]);
+
+        Bus bus = new Bus(fuelQuantity, litersPerKm, tankCapacity);
 
         int n = Integer.parseInt(scanner.nextLine());
 
@@ -16,41 +34,45 @@ public class Main {
 
             String command = inputData[0];
             String typeVehicle = inputData[1];
+            double busACConsumption = 1.4;
 
-            runCommand(command, inputData, typeVehicle, car, truck);
+            try {
+                if ("Drive".equals(command)) {
+                    double distance = Double.parseDouble(inputData[2]);
+                    if ("Car".equals(typeVehicle)) {
+                        System.out.println(car.driving(distance));
+                    } else if ("Truck".equals(typeVehicle)) {
+                        System.out.println(truck.driving(distance));
+                    } else if ("Bus".equals(typeVehicle)) {
+                        if (bus.isEmpty()) {
+                            bus.setEmpty(false);
+                            bus.setLitersPerKm(bus.getLitersPerKm() + busACConsumption);
+                        }
+                        System.out.println(bus.driving(distance));
+                    }
+                } else if ("Refuel".equals(command)) {
+                    double liters = Double.parseDouble(inputData[2]);
+                    if ("Car".equals(typeVehicle)) {
+                        car.refueling(liters);
+                    } else if ("Truck".equals(typeVehicle)) {
+                        truck.refueling(liters);
+                    } else if ("Bus".equals(typeVehicle)) {
+                        bus.refueling(liters);
+                    }
+                } else if ("DriveEmpty".equals(command)) {
+                    double distance = Double.parseDouble(inputData[2]);
+                    if (!bus.isEmpty()) {
+                        bus.setEmpty(true);
+                        bus.setLitersPerKm(bus.getLitersPerKm() - busACConsumption);
+                    }
+                    System.out.println(bus.driving(distance));
+                }
+            } catch (IllegalArgumentException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         System.out.println(car);
         System.out.println(truck);
-    }
-
-    private static void runCommand(String command, String[] inputData, String typeVehicle, VehicleImpl car, VehicleImpl truck) {
-        if ("Drive".equals(command)) {
-            double distance = Double.parseDouble(inputData[2]);
-            if ("Car".equals(typeVehicle)) {
-                System.out.println(car.driving(distance));
-            } else if ("Truck".equals(typeVehicle)) {
-                System.out.println(truck.driving(distance));
-            }
-        } else if ("Refuel".equals(command)) {
-            double liters = Double.parseDouble(inputData[2]);
-            if ("Car".equals(typeVehicle)) {
-                car.refueling(liters);
-            } else if ("Truck".equals(typeVehicle)) {
-                truck.refueling(liters);
-            }
-        }
-    }
-
-    public static VehicleImpl creatVechicles(String[] vehicleData) {
-        double fuelQuantity = Double.parseDouble(vehicleData[1]);
-        double litersPerKm = Double.parseDouble(vehicleData[2]);
-
-        VehicleImpl vechicles = null;
-        if ("Car".equals(vehicleData[0])) {
-            vechicles = new Car(fuelQuantity, litersPerKm);
-        } else if ("Truck".equals(vehicleData[0])) {
-            vechicles = new Truck(fuelQuantity, litersPerKm);
-        }
-        return vechicles;
+        System.out.println(bus);
     }
 }

@@ -4,8 +4,8 @@ public class Truck extends VehicleImpl {
     private final static double AC_ADDITIONAL_CONSUMPTION = 1.6;
     private static final double REFILL_PERCENTAGE = 0.95;
 
-    public Truck(double fuelQuantity, double litersPerKm) {
-        super(fuelQuantity, litersPerKm + AC_ADDITIONAL_CONSUMPTION);
+    public Truck(double fuelQuantity, double litersPerKm, double tankCapacity) {
+        super(fuelQuantity, litersPerKm + AC_ADDITIONAL_CONSUMPTION, tankCapacity);
     }
 
     @Override

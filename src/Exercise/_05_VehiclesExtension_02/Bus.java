@@ -1,4 +1,4 @@
-package vehiclesExtension;
+package src.Exercise._05_VehiclesExtension_02;
 
 public class Bus extends VehicleImpl {
     public static final boolean DEFAULT_IS_EMPTY = true;
