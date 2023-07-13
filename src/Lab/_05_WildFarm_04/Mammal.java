@@ -3,25 +3,21 @@ package src.Lab._05_WildFarm_04;
 import java.text.DecimalFormat;
 
 public abstract class Mammal extends Animal {
-    private  String livingRegion;
+    private String livingRegion;
 
-    public Mammal( String animalName, Double animalWeight, String livingRegion) {
-        super(animalName, animalWeight);
-        this.setLivingRegeon(livingRegion);
-    }
-
-    protected final String getLivingRegeon() {
-        return livingRegion;
-    }
-
-    private void setLivingRegeon(String livingRegion) {
+    public Mammal(String name, String type, double weight, String livingRegion) {
+        super(name, type, weight);
         this.livingRegion = livingRegion;
     }
 
     @Override
-    public String toString(){
-        DecimalFormat df = new DecimalFormat("#.##");
-        return this.getClass().getSimpleName() + "[" + this.getAnimalName() +  ", " +  df.format(this.getAnimalWeight())
-                + ", " + this.getLivingRegeon() + ", " + (this.getFoodEaten()) + "]";
+    public String toString() {
+        DecimalFormat formatter = new DecimalFormat("##.##");
+        return String.format("%s[%s, %s, %s, %d]", getType(), getName(),
+                formatter.format(getWeight()), this.livingRegion, getFoodEaten());
+    }
+
+    public String getLivingRegion() {
+        return livingRegion;
     }
 }

@@ -2,22 +2,20 @@ package src.Lab._05_WildFarm_04;
 
 public class Tiger extends Felime {
 
-    public Tiger(String animalName, Double animalWeight, String livingRegion) {
-        super(animalName, animalWeight, livingRegion);
+    public Tiger(String name, String type, double weight, String livingRegion) {
+        super(name, type, weight, livingRegion);
     }
 
     @Override
     public void makeSound() {
         System.out.println("ROAAR!!!");
-
     }
 
     @Override
     public void eat(Food food) {
-        if (food.getClass().getSimpleName().equals("Vegetable")){
-           throw new IllegalArgumentException((this.getClass().getSimpleName() + "s are not eating that type of food!"));
-        }else {
-            super.setFoodEaten(super.getFoodEaten() + food.getQuantity());
+        if(food instanceof Vegetable){
+            throw new IllegalArgumentException("Tigers are not eating that type of food!");
         }
+        super.eat(food);
     }
 }

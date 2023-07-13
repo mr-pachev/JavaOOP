@@ -1,84 +1,61 @@
 package src.Lab._05_WildFarm_04;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Animal> animals = new ArrayList<>();
 
-        List<Animal> animalList = new ArrayList<>();
+        String animalInput = scanner.nextLine();
+        while (!animalInput.equals("End")) {
+            String[] tokens = animalInput.split(" ");
+            Animal animal = createAnimal(tokens);
 
-        String input = reader.readLine();
+            String foodInput = scanner.nextLine();
+            Food food = getFood(foodInput.split(" "));
 
-            while (!("End".equals(input))) {
-                String inputFood = reader.readLine();
-
-                String[] tokensFood = inputFood.split(" ");
-                String[] tokensAnimal = input.split(" ");
-                Food food = null;
-                Animal animal = null;
-                switch (tokensFood[0]) {
-                    case "Vegetable":
-                        food = new Vegetable(Integer.parseInt(tokensFood[1]));
-                        break;
-                    case "Meat":
-                       food = new Meat(Integer.parseInt(tokensFood[1]));
-                        break;
-                }
-
-                    switch (tokensAnimal[0]) {
-                        case "Cat":
-                            try{
-                            animal = new Cat(tokensAnimal[1], Double.parseDouble(tokensAnimal[2]), tokensAnimal[3], tokensAnimal[4]);
-                            animal.makeSound();
-                            animal.eat(food);
-                    }catch (IllegalArgumentException ex){
-                    System.out.println(ex.getMessage());
-                }
-                           animalList.add(animal);
-                            break;
-                        case "Tiger":
-                            try{
-                            animal = new Tiger(tokensAnimal[1], Double.parseDouble(tokensAnimal[2]), tokensAnimal[3]);
-                            animal.makeSound();
-                            animal.eat(food);
-                    }catch (IllegalArgumentException ex){
-                    System.out.println(ex.getMessage());
-                }
-                            animalList.add(animal);
-                            break;
-                        case "Mouse":
-                            try {
-                                animal = new Mouse(tokensAnimal[1], Double.parseDouble(tokensAnimal[2]), tokensAnimal[3]);
-                                animal.makeSound();
-                                animal.eat(food);
-                            }catch (IllegalArgumentException ex){
-                                System.out.println(ex.getMessage());
-                            }
-                            animalList.add(animal);
-                            break;
-                        case "Zebra":
-                            try {
-
-                                animal = new Zebra(tokensAnimal[1], Double.parseDouble(tokensAnimal[2]), tokensAnimal[3]);
-                                animal.makeSound();
-                                animal.eat(food);
-                    }catch (IllegalArgumentException ex){
-                                System.out.println(ex.getMessage());
-                            }
-                            animalList.add(animal);
-                            break;
-                    }
-                input = reader.readLine();
+            animal.makeSound();
+            try {
+                animal.eat(food);
+            } catch (IllegalArgumentException ex) {
+                System.out.println(ex.getMessage());
             }
 
-        for (Animal animal : animalList) {
-            System.out.println(animal);
+            animals.add(animal);
+            animalInput = scanner.nextLine();
+        }
+
+        animals.forEach(System.out::println);
+    }
+
+    public static Food getFood(String[] tokens) {
+        String type = tokens[0];
+        int quantity = Integer.parseInt(tokens[1]);
+
+        if (type.equals("Meat")) {
+            return new Meat(quantity);
+        } else return new Vegetable(quantity);
+    }
+
+    public static Animal createAnimal(String[] tokens) {
+        String animalType = tokens[0];
+        String animalName = tokens[1];
+        double animalWeight = Double.parseDouble(tokens[2]);
+        String animalLivingRegion = tokens[3];
+        switch (animalType) {
+            case "Mouse":
+                return new Mouse(animalName, animalType, animalWeight, animalLivingRegion);
+            case "Cat":
+                return new Cat(animalName, animalType, animalWeight, animalLivingRegion, tokens[4]);
+            case "Zebra":
+                return new Zebra(animalName, animalType, animalWeight, animalLivingRegion);
+            case "Tiger":
+                return new Tiger(animalName, animalType, animalWeight, animalLivingRegion);
+            default:
+                throw new IllegalArgumentException("No such animal");
         }
     }
 }
-

@@ -1,8 +1,9 @@
 package src.Lab._05_WildFarm_04;
 
 public class Mouse extends Mammal {
-    public Mouse( String animalName, Double animalWeight,String livingRegion) {
-        super(animalName, animalWeight, livingRegion);
+
+    public Mouse(String name, String type, double weight, String livingRegion) {
+        super(name, type, weight, livingRegion);
     }
 
     @Override
@@ -12,10 +13,9 @@ public class Mouse extends Mammal {
 
     @Override
     public void eat(Food food) {
-        if (food.getClass().getSimpleName().equals("Meat")){
+        if(food instanceof Meat){
             throw new IllegalArgumentException("Mice are not eating that type of food!");
-        }else {
-            super.setFoodEaten(super.getFoodEaten() + food.getQuantity());
         }
+        super.eat(food);
     }
 }

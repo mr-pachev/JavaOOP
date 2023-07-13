@@ -1,40 +1,37 @@
 package src.Lab._05_WildFarm_04;
 
 public abstract class Animal {
-    private String animalName;
-    private Double animalWeight;
+    private String name;
+    private String type;
+    private double weight;
     private int foodEaten;
 
-    public Animal( String animalName, Double animalWeight) {
-        this.setAnimalName(animalName);
-        this.setAnimalWeight(animalWeight);
-        this.setFoodEaten(foodEaten);
-    }
-
-    protected final String getAnimalName() {
-        return animalName;
-    }
-
-    private void setAnimalName(String animalName) {
-        this.animalName = animalName;
-    }
-
-    protected final Double getAnimalWeight() {
-        return animalWeight;
-    }
-
-    private void setAnimalWeight(Double animalWeight) {
-        this.animalWeight = animalWeight;
-    }
-
-    protected final Integer getFoodEaten() {
-        return foodEaten;
-    }
-
-     void setFoodEaten(Integer foodEaten) {
-        this.foodEaten = foodEaten;
+    public Animal(String name, String type, double weight) {
+        this.name = name;
+        this.type = type;
+        this.weight = weight;
+        this.foodEaten = 0;
     }
 
     public abstract void makeSound();
-    public abstract void eat(Food food);
+
+    public void eat(Food food) {
+        this.foodEaten += food.getQuantity();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public int getFoodEaten() {
+        return foodEaten;
+    }
 }

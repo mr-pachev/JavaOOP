@@ -3,18 +3,10 @@ package src.Lab._05_WildFarm_04;
 import java.text.DecimalFormat;
 
 public class Cat extends Felime {
+
     private String breed;
-
-    public Cat(String animalName, Double animalWeight, String livingRegion, String breed) {
-        super(animalName, animalWeight, livingRegion);
-        this.setBreed(breed);
-    }
-
-    protected final String getBreed() {
-        return breed;
-    }
-
-    private void setBreed(String breed) {
+    public Cat(String name, String type, double weight, String livingRegion, String breed) {
+        super(name, type, weight, livingRegion);
         this.breed = breed;
     }
 
@@ -24,14 +16,9 @@ public class Cat extends Felime {
     }
 
     @Override
-    public void eat(Food food) {
-        super.setFoodEaten(super.getFoodEaten() + food.getQuantity());
-    }
-
-    @Override
-    public String toString(){
-        DecimalFormat df = new DecimalFormat("#.##");
-        return this.getClass().getSimpleName() + "[" + this.getAnimalName() + ", " + this.getBreed() + ", " +  df.format(this.getAnimalWeight())
-        + ", " + this.getLivingRegeon() + ", " + (this.getFoodEaten()) + "]";
+    public String toString() {
+        DecimalFormat formatter = new DecimalFormat("##.##");
+        return String.format("%s[%s, %s, %s, %s, %d]", getType(), getName(), this.breed,
+                formatter.format(getWeight()), getLivingRegion(), getFoodEaten());
     }
 }

@@ -1,23 +1,20 @@
 package src.Lab._05_WildFarm_04;
 
 public class Zebra extends Mammal {
-
-    public Zebra(String animalName, Double animalWeight, String livingRegion) {
-        super(animalName,animalWeight, livingRegion);
+    public Zebra(String name, String type, double weight, String livingRegion) {
+        super(name, type, weight, livingRegion);
     }
 
     @Override
     public void makeSound() {
         System.out.println("Zs");
-
     }
 
     @Override
     public void eat(Food food) {
-        if (food.getClass().getSimpleName().equals("Meat")){
-          throw new IllegalArgumentException((this.getClass().getSimpleName() + "s are not eating that type of food!"));
-        }else {
-            super.setFoodEaten(super.getFoodEaten() + food.getQuantity());
+        if (food instanceof Meat) {
+            throw new IllegalArgumentException("Zebras are not eating that type of food!");
         }
+        super.eat(food);
     }
 }
